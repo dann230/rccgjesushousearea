@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#091d3e">
+  <title>Ministries & Sermons - RCCG Jesus House Area</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/favicon.png" type="image/png"> 
+   <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            church: {
+              blue: '#0f2b5b',
+              'blue-light': '#1a3f7a',
+              'blue-dark': '#091d3e',
+              green: '#1b7a3d',
+              'green-light': '#23a44f',
+              'green-dark': '#11602e',
+              gold: '#c9a84c',
+              'gold-light': '#dfc06e',
+              'gold-dark': '#a88c3a',
+              cream: '#faf8f0',
+            }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #c9a84c, #dfc06e, #c9a84c); }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #c9a84c, #dfc06e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-divider { background: linear-gradient(90deg, transparent, #c9a84c, transparent); height: 1px; }
+    .cross-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .scroll-hidden { overflow: hidden; }
+
+    .month-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .month-card:hover {
+      transform: translateY(-6px);
+    }
+    .month-card:hover .month-overlay {
+      opacity: 1;
+    }
+    .month-card .month-overlay {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay {
+      transition: opacity 0.3s ease;
+    }
+    .modal-content {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .sermon-item:hover {
+      background: rgba(15, 43, 91, 0.03);
+    }
+
+    .year-btn.active {
+      background: linear-gradient(135deg, #c9a84c, #dfc06e);
+      color: #091d3e;
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+    }
+
+    .play-btn {
+      transition: all 0.3s ease;
+    }
+    .play-btn:hover {
+      transform: scale(1.1);
+    }
+    .play-btn.playing {
+      background: #1b7a3d;
+      box-shadow: 0 0 0 4px rgba(27, 122, 61, 0.2);
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .pulse-ring { animation: pulse-ring 2s infinite; }
+
+    .audio-bar {
+      display: inline-block;
+      width: 3px;
+      margin: 0 1px;
+      background: #1b7a3d;
+      border-radius: 2px;
+      animation: audio-wave 1.2s ease-in-out infinite;
+    }
+    .audio-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+    .audio-bar:nth-child(2) { animation-delay: 0.1s; height: 14px; }
+    .audio-bar:nth-child(3) { animation-delay: 0.2s; height: 6px; }
+    .audio-bar:nth-child(4) { animation-delay: 0.3s; height: 16px; }
+    .audio-bar:nth-child(5) { animation-delay: 0.4s; height: 10px; }
+
+    @keyframes audio-wave {
+      0%, 100% { transform: scaleY(0.5); }
+      50% { transform: scaleY(1); }
+    }
+
+    .search-input:focus {
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.2);
+    }
+
+    /* Audio Player */
+    .audio-player {
+      transition: all 0.3s ease;
+    }
+    .audio-player.active {
+      border-color: #1b7a3d;
+      background: rgba(27, 122, 61, 0.03);
+    }
+
+    .progress-bar {
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(to right, #1b7a3d 0%, #1b7a3d var(--progress, 0%), #e5e7eb var(--progress, 0%), #e5e7eb 100%);
+      cursor: pointer;
+    }
+    .progress-bar::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 2px;
+      background: transparent;
+    }
+    .progress-bar::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #1b7a3d;
+      cursor: pointer;
+      box-shadow: 0 0 0 3px white, 0 0 0 5px rgba(27,122,61,0.2);
+      margin-top: -5px;
+    }
+    .progress-bar::-moz-range-track {
+      height: 4px;
+      border-radius: 2px;
+      background: transparent;
+    }
+    .progress-bar::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #1b7a3d;
+      cursor: pointer;
+      box-shadow: 0 0 0 3px white, 0 0 0 5px rgba(27,122,61,0.2);
+      border: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Navigation -->
+  <nav class="bg-church-blue-dark sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+         <img src="img/favicon.png" 
+         alt="RCCG Jesus House Area Logo" 
+         class="w-10 h-10 object-contain">
+          <div>
+            <span class="text-base sm:text-lg font-bold font-display text-white leading-tight block">RCCG</span>
+            <span class="text-[10px] sm:text-xs text-church-gold tracking-wider uppercase">Jesus House Area</span>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+          <a href="index.html#home" class="text-white/70 hover:text-white text-xs sm:text-sm font-medium transition-colors hidden sm:block">Home</a>
+          <a href="index.html#about" class="text-white/70 hover:text-white text-xs sm:text-sm font-medium transition-colors hidden sm:block">About</a>
+          <a href="index.html#services" class="text-white/70 hover:text-white text-xs sm:text-sm font-medium transition-colors hidden sm:block">Services</a>
+          <span class="text-church-gold text-sm font-semibold hidden sm:block">Ministries</span>
+          <a href="index.html#contact" class="text-white/70 hover:text-white text-xs sm:text-sm font-medium transition-colors hidden sm:block">Contact</a>
+          <a href="index.html" class="ml-1 sm:ml-2 px-3 sm:px-5 py-2 border border-church-gold/50 text-church-gold text-xs sm:text-sm font-semibold rounded-full hover:bg-church-gold hover:text-church-blue-dark transition-all">
+            <i data-lucide="arrow-left" class="w-4 h-4 sm:mr-1 inline"></i>
+            <span class="hidden sm:inline">Back Home</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-church-blue relative overflow-hidden cross-pattern py-16 sm:py-24">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-church-green/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-church-gold/5 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-4">
+        <i data-lucide="headphones" class="w-4 h-4 text-church-gold"></i>
+        <span class="text-church-gold text-sm font-semibold tracking-wider uppercase">Preachings & Sermons</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+        Ministries & <span class="text-gold-gradient">The Word</span>
+      </h1>
+      <p class="text-white/60 max-w-2xl mx-auto text-base sm:text-lg">Feed your spirit with the undiluted Word of God. Select a month to explore powerful messages from each Sunday service.</p>
+
+      <!-- Audio Player (Initially Hidden) -->
+      <div id="audioPlayerContainer" class="hidden mt-8 max-w-2xl mx-auto">
+        <div class="audio-player bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+          <div class="flex items-center gap-4">
+            <button id="playerToggle" class="w-12 h-12 bg-church-green rounded-full flex items-center justify-center text-white shrink-0 play-btn pulse-ring">
+              <i data-lucide="play" class="w-5 h-5" id="playerIcon"></i>
+            </button>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <div id="audioWaveContainer" class="hidden">
+                  <span class="audio-bar"></span>
+                  <span class="audio-bar"></span>
+                  <span class="audio-bar"></span>
+                  <span class="audio-bar"></span>
+                  <span class="audio-bar"></span>
+                </div>
+                <p id="playerTitle" class="text-white text-sm font-semibold truncate">Select a sermon</p>
+              </div>
+              <p id="playerPreacher" class="text-white/50 text-xs mt-0.5">—</p>
+              <div class="mt-2">
+                <input type="range" class="progress-bar" min="0" max="100" value="0" id="progressSlider">
+                <div class="flex justify-between mt-1">
+                  <span id="currentTime" class="text-white/40 text-xs">0:00</span>
+                  <span id="totalTime" class="text-white/40 text-xs">0:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Search -->
+  <section class="bg-gray-50 border-b border-gray-100 sticky top-16 sm:top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+        <!-- Year Filter -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider hidden sm:block">Year:</span>
+          <div class="flex gap-2" id="yearFilters">
+            <button class="year-btn active px-4 py-2 rounded-full text-sm font-semibold bg-gray-200 text-gray-700 transition-all" data-year="2026">2026</button>
+            <button class="year-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-200 text-gray-700 transition-all" data-year="2025">2025</button>
+            <button class="year-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-200 text-gray-700 transition-all" data-year="2024">2024</button>
+          </div>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <!-- Search -->
+        <div class="relative w-full sm:w-auto">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input type="text" id="searchInput" placeholder="Search sermons..." class="search-input w-full sm:w-64 pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-church-gold transition-all bg-white">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Months Grid -->
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="monthsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Dynamically generated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sermon Modal -->
+  <div id="sermonModal" class="modal-overlay fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center opacity-0 pointer-events-none p-4">
+    <div class="modal-content bg-white rounded-t-3xl sm:rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden transform translate-y-8 opacity-0">
+      <!-- Modal Header -->
+      <div id="modalHeader" class="relative h-40 sm:h-48 bg-church-blue overflow-hidden">
+        <img id="modalImage" src="" alt="" class="w-full h-full object-cover opacity-50">
+        <div class="absolute inset-0 bg-gradient-to-t from-church-blue-dark/90 to-transparent"></div>
+        <button id="closeModal" class="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div class="absolute bottom-4 left-6 right-6">
+          <h3 id="modalMonthTitle" class="text-xl sm:text-2xl font-display font-bold text-white"></h3>
+          <p id="modalTheme" class="text-church-gold text-sm mt-1"></p>
+        </div>
+      </div>
+      
+      <!-- Sermons List -->
+      <div class="overflow-y-auto max-h-[calc(85vh-12rem)] sm:max-h-[calc(85vh-12rem)] p-4 sm:p-6">
+        <div id="sermonList" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // ============================
+    // SERMON DATA
+    // ============================
+    const sermonData = {
+      2026: {
+        january: {
+          theme: "New Beginnings & Fresh Grace",
+          image: "http://static.photos/nature/640x360/1",
+          sermons: [
+            { date: "January 4, 2026", title: "Walking in Newness of Life", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+            { date: "January 11, 2026", title: "Fresh Grace for New Seasons", preacher: "Pastor Francis Angbo", duration: "38 min", durationSec: 2280 },
+            { date: "January 18, 2026", title: "Forget the Former Things", preacher: "Deacon Moses", duration: "42 min", durationSec: 2520 },
+            { date: "January 25, 2026", title: "The Beauty of a Fresh Start", preacher: "Pastor Usman", duration: "35 min", durationSec: 2100 }
+          ]
+        },
+        february: {
+          theme: "Love That Transforms",
+          image: "http://static.photos/red/640x360/2",
+          sermons: [
+            { date: "February 1, 2026", title: "The Greatest of These is Love", preacher: "Pastor Francis Angbo", duration: "40 min", durationSec: 2400 },
+            { date: "February 8, 2026", title: "Love: The Evidence of Discipleship", preacher: "Deaconess Angbo", duration: "36 min", durationSec: 2160 },
+            { date: "February 15, 2026", title: "Loving the Unlovable", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+            { date: "February 22, 2026", title: "Walking in God's Agape Love", preacher: "Pastor Francis Angbo", duration: "38 min", durationSec: 2280 }
+          ]
+        },
+        march: {
+          theme: "Enlarge My Coast",
+          image: "img/Theme/March2026.jpeg",
+          sermons: [
+            { date: "March 1, 2026", title: "Breaking Through Barriers", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+            { date: "March 8, 2026", title: "The Power of Persistent Prayer", preacher: "Pastor Usman", duration: "41 min", durationSec: 2460 },
+            { date: "March 15, 2026", title: "When God Steps In", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+            { date: "March 22, 2026", title: "Possessing Your Possessions", preacher: "Deaconess Angbo", duration: "37 min", durationSec: 2220 },
+            { date: "March 29, 2026 (Easter)", title: "Resurrection Power at Work", preacher: "Pastor Francis Angbo", duration: "55 min", durationSec: 3300 }
+          ]
+        },
+        april: {
+          theme: "Advancing My Service",
+          image: "img/Theme/April2026.jpeg",
+          sermons: [
+            { date: "April 5, 2026", title: "Let the Word Dwell Richly", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+            { date: "April 12, 2026", title: "The Seed and the Soil", preacher: "Deacon Moses", duration: "39 min", durationSec: 2340 },
+            { date: "April 19, 2026", title: "Growing Deep Roots", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+            { date: "April 26, 2026", title: "Anchored in His Promises", preacher: "Pastor Francis Angbo", duration: "33 min", durationSec: 1980 }
+          ]
+        },
+        may: {
+          theme: "Building Foundations [Stretch]",
+          image: "img/Theme/May2026.jpeg",
+          sermons: [
+            { date: "May 3, 2026", title: "The Sacrifice of Praise", preacher: "Pastor Francis Angbo", duration: "41 min", durationSec: 2460 },
+            { date: "May 10, 2026", title: "When Praise Changes Everything", preacher: "Deaconess Angbo", duration: "37 min", durationSec: 2220 },
+            { date: "May 17, 2026", title: "Praise: The Weapon of Warfare", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+            { date: "May 24, 2026", title: "Singing Through the Storm", preacher: "Pastor Usman", duration: "34 min", durationSec: 2040 },
+            { date: "May 31, 2026", title: "Children of Excellence", preacher: "Sister Ifeoluwa", duration: "15 min", durationSec: 2100, audio: "aud/Children's day.mp3" }
+          ]
+        },
+        june: {
+          theme: "Empowered for Impact",
+          image: "img/Theme/June2026.jpeg",
+          sermons: [
+            { date: "June 7, 2026", title: "Divine Partnership", preacher: "Pastor E.A Adeboye", duration: "51 min", durationSec: 2940, audio: "aud/June thanksgiving.mp3" },
+            { date: "June 14, 2026", title: "Pentecost: Power from On High", preacher: "Pastor Francis Angbo", duration: "52 min", durationSec: 3120 },
+            { date: "June 21, 2026", title: "Gifts of the Spirit", preacher: "Deacon Moses", duration: "44 min", durationSec: 2640 },
+            { date: "June 28, 2026", title: "Operating in His Power", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 }
+          ]
+        },
+        july: {
+          theme: "Divine Providence",
+          image: "http://static.photos/nature/640x360/7",
+          sermons: [
+            { date: "July 5, 2026", title: "Jehovah Jireh: The Lord Provides", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+            { date: "July 12, 2026", title: "God's Faithfulness in Famine", preacher: "Deaconess Angbo", duration: "36 min", durationSec: 2160 },
+            { date: "July 19, 2026", title: "Provision Beyond Expectation", preacher: "Pastor Francis Angbo", duration: "47 min", durationSec: 2820 },
+            { date: "July 26, 2026", title: "Trusting God's Timing", preacher: "Pastor Usman", duration: "40 min", durationSec: 2400 }
+          ]
+        },
+        august: {
+          theme: "Family & Household Faith",
+          image: "img/Theme/August2026.jpg",
+          sermons: [
+            { date: "August 2, 2026", title: "Building a Godly Home", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+            { date: "August 9, 2026", title: "Husbands, Love Your Wives", preacher: "Pastor Francis Angbo", duration: "38 min", durationSec: 2280 },
+            { date: "August 16, 2026", title: "Raising Godly Children", preacher: "Deacon Moses", duration: "41 min", durationSec: 2460 },
+            { date: "August 23, 2026", title: "As for Me and My House", preacher: "Deaconess Angbo", duration: "35 min", durationSec: 2100 },
+            { date: "August 30, 2026", title: "Family Faith that Endures", preacher: "Pastor Francis Angbo", duration: "39 min", durationSec: 2340 }
+          ]
+        },
+        september: {
+          theme: "The King's Mandate",
+          image: "http://static.photos/blue/640x360/9",
+          sermons: [
+            { date: "September 6, 2026", title: "Honouring the King", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+            { date: "September 13, 2026", title: "Obedience is Better", preacher: "Pastor Usman", duration: "39 min", durationSec: 2340 },
+            { date: "September 20, 2026", title: "Serving with Excellence", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+            { date: "September 27, 2026", title: "The Mandate to Prosper", preacher: "Deacon Moses", duration: "37 min", durationSec: 2220 }
+          ]
+        },
+        october: {
+          theme: "Harvest of Joy",
+          image: "http://static.photos/nature/640x360/10",
+          sermons: [
+            { date: "October 4, 2026", title: "Reaping in Joy", preacher: "Pastor Francis Angbo", duration: "40 min", durationSec: 2400 },
+            { date: "October 11, 2026", title: "Sowing and Reaping", preacher: "Deaconess Angbo", duration: "35 min", durationSec: 2100 },
+            { date: "October 18, 2026", title: "Harvest of Righteousness", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+            { date: "October 25, 2026", title: "Joy Unspeakable", preacher: "Pastor Usman", duration: "33 min", durationSec: 1980 }
+          ]
+        },
+        november: {
+          theme: "Thanksgiving & Gratitude",
+          image: "http://static.photos/food/640x360/11",
+          sermons: [
+            { date: "November 1, 2026", title: "Enter His Gates with Thanksgiving", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+            { date: "November 8, 2026", title: "A Heart of Gratitude", preacher: "Deacon Moses", duration: "38 min", durationSec: 2280 },
+            { date: "November 15, 2026", title: "Grateful in All Seasons", preacher: "Pastor Francis Angbo", duration: "36 min", durationSec: 2160 },
+            { date: "November 22, 2026", title: "The Power of a Thankful Heart", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+            { date: "November 29, 2026", title: "Joyful Thanksgiving", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 }
+          ]
+        },
+        december: {
+          theme: "Celebrating Emmanuel",
+          image: "http://static.photos/holiday/640x360/12",
+          sermons: [
+            { date: "December 6, 2026", title: "Emmanuel: God With Us", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+            { date: "December 13, 2026", title: "The Wonder of Christmas", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+            { date: "December 20, 2026", title: "A Savior is Born", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+            { date: "December 27, 2026", title: "Joy to the World", preacher: "Deacon Moses", duration: "35 min", durationSec: 2100 }
+          ]
+        }
+      },
+      2025: {
+        january: { theme: "Arise & Shine", image: "http://static.photos/nature/640x360/13", sermons: [
+          { date: "January 5, 2025", title: "A New Dawn Arises", preacher: "Pastor Francis Angbo", duration: "52 min", durationSec: 3120 },
+          { date: "January 12, 2025", title: "Shining in the Darkness", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "January 19, 2025", title: "The Light of the World", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "January 26, 2025", title: "Arise and Take Your Place", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 }
+        ]},
+        february: { theme: "Building on the Rock", image: "http://static.photos/education/640x360/14", sermons: [
+          { date: "February 2, 2025", title: "The Sure Foundation", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "February 9, 2025", title: "When the Winds Blow", preacher: "Pastor Usman", duration: "39 min", durationSec: 2340 },
+          { date: "February 16, 2025", title: "Rock Solid Faith", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+          { date: "February 23, 2025", title: "The Wise Builder", preacher: "Deacon Moses", duration: "36 min", durationSec: 2160 }
+        ]},
+        march: { theme: "Redeemed by Blood", image: "http://static.photos/red/640x360/15", sermons: [
+          { date: "March 2, 2025", title: "The Blood Speaks", preacher: "Pastor Francis Angbo", duration: "47 min", durationSec: 2820 },
+          { date: "March 9, 2025", title: "Redeemed from the Curse", preacher: "Deaconess Angbo", duration: "41 min", durationSec: 2460 },
+          { date: "March 16, 2025", title: "Washed in the Blood", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "March 23, 2025", title: "Covenant of Blood", preacher: "Pastor Francis Angbo", duration: "37 min", durationSec: 2220 },
+          { date: "March 30, 2025", title: "The Blood That Redeems", preacher: "Pastor Usman", duration: "39 min", durationSec: 2340 }
+        ]},
+        april: { theme: "Freedom in Christ", image: "http://static.photos/blue/640x360/16", sermons: [
+          { date: "April 6, 2025", title: "Whom the Son Sets Free", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "April 13, 2025", title: "He is Risen!", preacher: "Pastor Francis Angbo", duration: "55 min", durationSec: 3300 },
+          { date: "April 20, 2025", title: "Walking in Liberty", preacher: "Deacon Moses", duration: "38 min", durationSec: 2280 },
+          { date: "April 27, 2025", title: "No More Bondage", preacher: "Deaconess Angbo", duration: "41 min", durationSec: 2460 }
+        ]},
+        may: { theme: "Grace for the Race", image: "http://static.photos/wellness/640x360/17", sermons: [
+          { date: "May 4, 2025", title: "Running with Endurance", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "May 11, 2025", title: "Sufficient Grace", preacher: "Pastor Usman", duration: "36 min", durationSec: 2160 },
+          { date: "May 18, 2025", title: "Finishing the Race", preacher: "Pastor Francis Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "May 25, 2025", title: "The Prize Awaits", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 }
+        ]},
+        june: { theme: "Fire of Revival", image: "http://static.photos/technology/640x360/18", sermons: [
+          { date: "June 1, 2025", title: "Set the World on Fire", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+          { date: "June 8, 2025", title: "Burning for God", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "June 15, 2025", title: "Revival Fire", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+          { date: "June 22, 2025", title: "Refiner's Fire", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+          { date: "June 29, 2025", title: "Spirit of Revival", preacher: "Pastor Francis Angbo", duration: "41 min", durationSec: 2460 }
+        ]},
+        july: { theme: "Anchored in Hope", image: "http://static.photos/nature/640x360/19", sermons: [
+          { date: "July 6, 2025", title: "Hope that Anchors the Soul", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+          { date: "July 13, 2025", title: "When Hope Seems Lost", preacher: "Deacon Moses", duration: "37 min", durationSec: 2220 },
+          { date: "July 20, 2025", title: "Hope Against Hope", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "July 27, 2025", title: "Unfailing Promises", preacher: "Deaconess Angbo", duration: "39 min", durationSec: 2340 }
+        ]},
+        august: { theme: "Wisdom from Above", image: "http://static.photos/education/640x360/20", sermons: [
+          { date: "August 3, 2025", title: "Ask for Wisdom", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+          { date: "August 10, 2025", title: "The Wisdom of God", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+          { date: "August 17, 2025", title: "Walking in Divine Wisdom", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "August 24, 2025", title: "Wisdom That Works", preacher: "Pastor Francis Angbo", duration: "35 min", durationSec: 2100 },
+          { date: "August 31, 2025", title: "Living in Wisdom", preacher: "Deacon Moses", duration: "40 min", durationSec: 2400 }
+        ]},
+        september: { theme: "Prevailing Prayer", image: "http://static.photos/monochrome/640x360/21", sermons: [
+          { date: "September 7, 2025", title: "The Prayer that Prevails", preacher: "Pastor Francis Angbo", duration: "47 min", durationSec: 2820 },
+          { date: "September 14, 2025", title: "Wrestling in Prayer", preacher: "Deaconess Angbo", duration: "41 min", durationSec: 2460 },
+          { date: "September 21, 2025", title: "Prayer Without Ceasing", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "September 28, 2025", title: "When Prayers Are Answered", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 }
+        ]},
+        october: { theme: "Kingdom Advancement", image: "http://static.photos/cityscape/640x360/22", sermons: [
+          { date: "October 5, 2025", title: "Thy Kingdom Come", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "October 12, 2025", title: "Expanding the Borders", preacher: "Pastor Francis Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "October 19, 2025", title: "Kingdom Citizens", preacher: "Deacon Moses", duration: "43 min", durationSec: 2580 },
+          { date: "October 26, 2025", title: "Taking Territory", preacher: "Deaconess Angbo", duration: "37 min", durationSec: 2220 }
+        ]},
+        november: { theme: "Covenant Blessings", image: "http://static.photos/gold/640x360/23", sermons: [
+          { date: "November 2, 2025", title: "Covenant Keeping God", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "November 9, 2025", title: "Blessings of the Righteous", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+          { date: "November 16, 2025", title: "Walking in Covenant", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+          { date: "November 23, 2025", title: "The Blessing Makes Rich", preacher: "Deacon Moses", duration: "36 min", durationSec: 2160 },
+          { date: "November 30, 2025", title: "Thanksgiving in the House", preacher: "Pastor Francis Angbo", duration: "41 min", durationSec: 2460 }
+        ]},
+        december: { theme: "Finishing Strong", image: "http://static.photos/holiday/640x360/24", sermons: [
+          { date: "December 7, 2025", title: "Running to Win", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+          { date: "December 14, 2025", title: "The Finish Line", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "December 21, 2025", title: "Endurance to the End", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "December 28, 2025", title: "Christmas: Love Came Down", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 }
+        ]}
+      },
+      2024: {
+        january: { theme: "Vision & Direction", image: "http://static.photos/minimal/640x360/25", sermons: [
+          { date: "January 2, 2024", title: "Seers of the New Season", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+          { date: "January 9, 2024", title: "Vision for the Year", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "January 16, 2024", title: "Direction from the Lord", preacher: "Deacon Moses", duration: "38 min", durationSec: 2280 },
+          { date: "January 23, 2024", title: "Where There is No Vision", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "January 30, 2024", title: "Seeing the Invisible", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 }
+        ]},
+        february: { theme: "Strong Foundation", image: "http://static.photos/construction/640x360/26", sermons: [
+          { date: "February 6, 2024", title: "Laying the Foundation", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+          { date: "February 13, 2024", title: "Bеing Rooted and Grounded", preacher: "Pastor Usman", duration: "37 min", durationSec: 2220 },
+          { date: "February 20, 2024", title: "Spiritual Foundations", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "February 27, 2024", title: "The Sure Foundation", preacher: "Deaconess Angbo", duration: "35 min", durationSec: 2100 }
+        ]},
+        march: { theme: "Victory in Battle", image: "http://static.photos/sport/640x360/27", sermons: [
+          { date: "March 6, 2024", title: "More Than Conquerors", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "March 13, 2024", title: "The Battle is the Lord's", preacher: "Deacon Moses", duration: "41 min", durationSec: 2460 },
+          { date: "March 20, 2024", title: "Weapons of Our Warfare", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "March 27, 2024", title: "Victory Assured", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 }
+        ]},
+        april: { theme: "Resurrection Power", image: "http://static.photos/nature/640x360/28", sermons: [
+          { date: "April 3, 2024", title: "Power of the Resurrection", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+          { date: "April 10, 2024 (Easter)", title: "He Arose!", preacher: "Pastor Francis Angbo", duration: "52 min", durationSec: 3120 },
+          { date: "April 17, 2024", title: "Risen with Christ", preacher: "Deaconess Angbo", duration: "40 min", durationSec: 2400 },
+          { date: "April 24, 2024", title: "Living in Resurrection Power", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 }
+        ]},
+        may: { theme: "Divine Favour", image: "http://static.photos/gold/640x360/29", sermons: [
+          { date: "May 1, 2024", title: "Favour that Speaks", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "May 8, 2024", title: "Highly Favoured", preacher: "Pastor Usman", duration: "37 min", durationSec: 2220 },
+          { date: "May 15, 2024", title: "Finding Favour with God", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "May 22, 2024", title: "The Favour Factor", preacher: "Deaconess Angbo", duration: "39 min", durationSec: 2340 },
+          { date: "May 29, 2024", title: "Crowned with Favour", preacher: "Pastor Francis Angbo", duration: "41 min", durationSec: 2460 }
+        ]},
+        june: { theme: "Spiritual Growth", image: "http://static.photos/green/640x360/30", sermons: [
+          { date: "June 5, 2024", title: "Growing in Grace", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+          { date: "June 12, 2024", title: "From Glory to Glory", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+          { date: "June 19, 2024", title: "Growing Up in God", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "June 26, 2024", title: "Maturity in Christ", preacher: "Deaconess Angbo", duration: "36 min", durationSec: 2160 }
+        ]},
+        july: { theme: "Jehovah Over Do", image: "http://static.photos/abstract/640x360/31", sermons: [
+          { date: "July 3, 2024", title: "The God Who Does Exceedingly", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+          { date: "July 10, 2024", title: "Above All We Ask or Think", preacher: "Deacon Moses", duration: "43 min", durationSec: 2580 },
+          { date: "July 17, 2024", title: "Jehovah the Overcomer", preacher: "Pastor Francis Angbo", duration: "47 min", durationSec: 2820 },
+          { date: "July 24, 2024", title: "More Than Enough", preacher: "Deaconess Angbo", duration: "38 min", durationSec: 2280 },
+          { date: "July 31, 2024", title: "Exceeding Abundance", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 }
+        ]},
+        august: { theme: "Mountain Moving Faith", image: "http://static.photos/aerial/640x360/32", sermons: [
+          { date: "August 7, 2024", title: "Faith that Moves Mountains", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "August 14, 2024", title: "Mustard Seed Faith", preacher: "Pastor Usman", duration: "38 min", durationSec: 2280 },
+          { date: "August 21, 2024", title: "Standing on the Word", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "August 28, 2024", title: "Great Faith", preacher: "Deaconess Angbo", duration: "36 min", durationSec: 2160 }
+        ]},
+        september: { theme: "Divine Restoration", image: "http://static.photos/vintage/640x360/33", sermons: [
+          { date: "September 4, 2024", title: "Restoring the Years", preacher: "Pastor Francis Angbo", duration: "48 min", durationSec: 2880 },
+          { date: "September 11, 2024", title: "I Will Restore", preacher: "Pastor Usman", duration: "42 min", durationSec: 2520 },
+          { date: "September 18, 2024", title: "Double for Your Trouble", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 },
+          { date: "September 25, 2024", title: "Beauty for Ashes", preacher: "Deaconess Angbo", duration: "39 min", durationSec: 2340 }
+        ]},
+        october: { theme: "Praise Without Limits", image: "http://static.photos/monochrome/640x360/34", sermons: [
+          { date: "October 2, 2024", title: "Praise: The Key to Breakthrough", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "October 9, 2024", title: "Unstoppable Praise", preacher: "Pastor Usman", duration: "37 min", durationSec: 2220 },
+          { date: "October 16, 2024", title: "Praise Opens Doors", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
+          { date: "October 23, 2024", title: "Let Everything That Has Breath", preacher: "Deaconess Angbo", duration: "39 min", durationSec: 2340 },
+          { date: "October 30, 2024", title: "Endless Praise", preacher: "Pastor Francis Angbo", duration: "41 min", durationSec: 2460 }
+        ]},
+        november: { theme: "Thanksgiving unto God", image: "http://static.photos/food/640x360/35", sermons: [
+          { date: "November 6, 2024", title: "It is Good to Give Thanks", preacher: "Pastor Francis Angbo", duration: "42 min", durationSec: 2520 },
+          { date: "November 13, 2024", title: "Thanksgiving: The Will of God", preacher: "Pastor Usman", duration: "36 min", durationSec: 2160 },
+          { date: "November 20, 2024", title: "In Everything Give Thanks", preacher: "Pastor Francis Angbo", duration: "45 min", durationSec: 2700 },
+          { date: "November 27, 2024", title: "The Thankful Heart", preacher: "Deacon Moses", duration: "38 min", durationSec: 2280 }
+        ]},
+        december: { theme: "Glory to God in the Highest", image: "http://static.photos/holiday/640x360/36", sermons: [
+          { date: "December 4, 2024", title: "Glory to God in the Highest", preacher: "Pastor Francis Angbo", duration: "47 min", durationSec: 2820 },
+          { date: "December 11, 2024", title: "The Glory of Christmas", preacher: "Deaconess Angbo", duration: "39 min", durationSec: 2340 },
+          { date: "December 18, 2024", title: "From Glory to Glory", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640 },
+          { date: "December 25, 2024", title: "Emmanuel Has Come", preacher: "Pastor Francis Angbo", duration: "50 min", durationSec: 3000 },
+          { date: "December 31, 2024", title: "Ending in Glory", preacher: "Pastor Francis Angbo", duration: "56 min", durationSec: 3360 }
+        ]}
+      }
+    };
+
+    // ============================
+    // APP STATE
+    // ============================
+    let currentYear = 2026;
+    let currentPlayingSermon = null;
+    let isPlaying = false;
+    let playInterval = null;
+    // Audio element for real sermon files
+    const sermonAudio = new Audio();
+    sermonAudio.preload = 'metadata';
+    sermonAudio.addEventListener('loadedmetadata', () => {
+      if (currentPlayingSermon && currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
+        updateTimeDisplay();
+      }
+    });
+    sermonAudio.addEventListener('timeupdate', () => {
+      if (!currentPlayingSermon) return;
+      const progressSlider = document.getElementById('progressSlider');
+      if (currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio && sermonAudio.duration) {
+        const pct = (sermonAudio.currentTime / sermonAudio.duration) * 100;
+        progressSlider.value = isNaN(pct) ? 0 : pct;
+        updateProgressFill(progressSlider);
+        updateTimeDisplay();
+      }
+    });
+    sermonAudio.addEventListener('ended', () => {
+      isPlaying = false;
+      updatePlayerUI();
+    });
+
+    const progressSlider = document.getElementById('progressSlider');
+    const updateProgressFill = (slider) => {
+      if (!slider) return;
+      const value = parseInt(slider.value, 10) || 0;
+      slider.style.setProperty('--progress', `${value}%`);
+    };
+
+    if (progressSlider) {
+      const seekAudio = () => {
+        if (!currentPlayingSermon) return;
+        const sermon = currentPlayingSermon.sermon;
+        const value = parseInt(progressSlider.value, 10);
+
+        if (sermon && sermon.audio && sermonAudio.duration) {
+          sermonAudio.currentTime = (value / 100) * sermonAudio.duration;
+        }
+
+        updateProgressFill(progressSlider);
+        updateTimeDisplay();
+      };
+
+      progressSlider.addEventListener('input', seekAudio);
+      progressSlider.addEventListener('change', seekAudio);
+      updateProgressFill(progressSlider);
+    }
+
+    const monthNames = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+    const monthLabels = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const monthColors = [
+      'from-blue-900 to-blue-700',    // Jan - New Beginnings
+      'from-red-800 to-pink-600',     // Feb - Love
+      'from-green-800 to-emerald-600',// Mar - Breakthrough
+      'from-emerald-700 to-green-500',// Apr - Rooted
+      'from-yellow-700 to-amber-500', // May - Praise
+      'from-orange-700 to-red-500',   // Jun - Fire/Power
+      'from-blue-800 to-indigo-600',  // Jul - Providence
+      'from-purple-800 to-violet-600',// Aug - Family
+      'from-sky-800 to-cyan-600',     // Sep - King's Mandate
+      'from-amber-700 to-yellow-500', // Oct - Harvest
+      'from-orange-800 to-amber-600', // Nov - Thanksgiving
+      'from-red-900 to-red-600'       // Dec - Emmanuel
+    ];
+
+    // ============================
+    // RENDER MONTHS GRID
+    // ============================
+    function renderMonths() {
+      const grid = document.getElementById('monthsGrid');
+      const yearData = sermonData[currentYear];
+      
+      if (!yearData) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12"><i data-lucide="calendar-x" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i><p class="text-gray-400 text-lg">No sermons available for ${currentYear}</p></div>`;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = '';
+      
+      monthNames.forEach((month, index) => {
+        if (!yearData[month]) return;
+        
+        const data = yearData[month];
+        const sermonCount = data.sermons.length;
+        
+        const card = document.createElement('div');
+        card.className = 'month-card relative rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl group';
+        card.innerHTML = `
+          <div class="aspect-[4/3] relative">
+            <img src="${data.image}" alt="${monthLabels[index]}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t ${monthColors[index]} opacity-70 group-hover:opacity-80 transition-opacity"></div>
+            <div class="month-overlay absolute inset-0 bg-black/30 flex items-center justify-center">
+              <div class="w-14 h-14 gold-gradient rounded-full flex items-center justify-center shadow-xl">
+                <i data-lucide="play" class="w-6 h-6 text-church-blue-dark ml-0.5"></i>
+              </div>
+            </div>
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+              <span class="text-white/60 text-xs font-semibold uppercase tracking-wider">${currentYear}</span>
+              <h3 class="text-base sm:text-lg font-display font-bold text-white leading-tight">${monthLabels[index]}</h3>
+              <p class="text-white/70 text-xs mt-1 line-clamp-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${data.theme}</p>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-[10px] text-white font-medium">
+                  <i data-lucide="headphones" class="w-3 h-3"></i>
+                  ${sermonCount} sermon${sermonCount !== 1 ? 's' : ''}
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        card.addEventListener('click', () => openMonthModal(month, index));
+        grid.appendChild(card);
+      });
+      
+      lucide.createIcons();
+    }
+
+    // ============================
+    // MODAL
+    // ============================
+    const modal = document.getElementById('sermonModal');
+    const closeBtn = document.getElementById('closeModal');
+    
+    function openMonthModal(month, monthIndex) {
+      const yearData = sermonData[currentYear];
+      const data = yearData[month];
+      
+      document.getElementById('modalMonthTitle').textContent = `${monthLabels[monthIndex]} ${currentYear}`;
+      document.getElementById('modalTheme').textContent = `Theme: ${data.theme}`;
+      document.getElementById('modalImage').src = data.image;
+      
+      const list = document.getElementById('sermonList');
+      list.innerHTML = '';
+      
+      data.sermons.forEach((sermon, idx) => {
+        const isCurrentlyPlaying = currentPlayingSermon && currentPlayingSermon.month === month && currentPlayingSermon.year === currentYear && currentPlayingSermon.index === idx;
+        
+        const item = document.createElement('div');
+        item.className = `sermon-item flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-gray-100 transition-all cursor-pointer ${isCurrentlyPlaying ? 'bg-church-green/5 border-church-green/30' : 'hover:border-church-blue/20'}`;
+        item.innerHTML = `
+          <button class="play-btn w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0 transition-all ${isCurrentlyPlaying && isPlaying ? 'playing bg-church-green text-white' : 'bg-church-blue text-white hover:bg-church-blue-light'}">
+            <i data-lucide="${isCurrentlyPlaying && isPlaying ? 'pause' : 'play'}" class="w-4 h-4 sm:w-5 sm:h-5 ${isCurrentlyPlaying && isPlaying ? '' : 'ml-0.5'}"></i>
+          </button>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-sm sm:text-base font-semibold text-church-blue truncate">${sermon.title}</h4>
+            <p class="text-xs text-gray-400 mt-0.5">${sermon.preacher} · ${sermon.date}</p>
+          </div>
+          <div class="text-right shrink-0 hidden sm:block">
+            <span class="text-xs text-gray-400">${sermon.duration}</span>
+            ${isCurrentlyPlaying ? '<div class="flex items-center justify-end mt-1"><span class="audio-bar"></span><span class="audio-bar"></span><span class="audio-bar"></span><span class="audio-bar"></span><span class="audio-bar"></span></div>' : ''}
+          </div>
+        `;
+        
+        item.querySelector('.play-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          playSermon(sermon, month, idx);
+        });
+        item.addEventListener('click', () => playSermon(sermon, month, idx));
+        
+        list.appendChild(item);
+      });
+      
+      modal.classList.add('active');
+      document.body.classList.add('scroll-hidden');
+      lucide.createIcons();
+    }
+    
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.classList.remove('scroll-hidden');
+    }
+    
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // ============================
+    // AUDIO PLAYER SIMULATION
+    // ============================
+    function playSermon(sermon, month, idx) {
+      const playerContainer = document.getElementById('audioPlayerContainer');
+      const playerTitle = document.getElementById('playerTitle');
+      const playerPreacher = document.getElementById('playerPreacher');
+      const playerIcon = document.getElementById('playerIcon');
+      const waveContainer = document.getElementById('audioWaveContainer');
+      const progressSlider = document.getElementById('progressSlider');
+      
+      playerContainer.classList.remove('hidden');
+      
+      // If clicking the same sermon, toggle play/pause
+      if (currentPlayingSermon && currentPlayingSermon.month === month && currentPlayingSermon.year === currentYear && currentPlayingSermon.index === idx) {
+        // Toggle play/pause for same sermon
+        if (currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
+          if (sermonAudio.paused) {
+            sermonAudio.play();
+            isPlaying = true;
+          } else {
+            sermonAudio.pause();
+            isPlaying = false;
+          }
+        } else {
+          isPlaying = !isPlaying;
+        }
+        updatePlayerUI();
+        return;
+      }
+
+      // start a new sermon
+      currentPlayingSermon = { month, year: currentYear, index: idx, sermon };
+      isPlaying = true;
+
+      playerTitle.textContent = sermon.title;
+      playerPreacher.textContent = sermon.preacher + ' · ' + sermon.date;
+      progressSlider.value = 0;
+
+      // If sermon has a real audio file, load and play it
+      if (sermon.audio) {
+        try {
+          sermonAudio.src = sermon.audio;
+          sermonAudio.currentTime = 0;
+          sermonAudio.play();
+        } catch (err) {
+          console.warn('Error loading sermon audio', err);
+        }
+      }
+
+      updatePlayerUI();
+
+      // Scroll to player
+      playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Re-render modal content to update playing states
+      const monthIndex = monthNames.indexOf(month);
+      openMonthModal(month, monthIndex);
+    }
+    
+    function updatePlayerUI() {
+      const playerIcon = document.getElementById('playerIcon');
+      const toggleBtn = document.getElementById('playerToggle');
+      const waveContainer = document.getElementById('audioWaveContainer');
+
+      if (isPlaying) {
+        playerIcon.setAttribute('data-lucide', 'pause');
+        toggleBtn.classList.add('playing');
+        waveContainer.classList.remove('hidden');
+      } else {
+        playerIcon.setAttribute('data-lucide', 'play');
+        toggleBtn.classList.remove('playing');
+        waveContainer.classList.add('hidden');
+      }
+      lucide.createIcons();
+
+      // If current sermon has real audio, rely on the audio element for timing
+      if (currentPlayingSermon && currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
+        if (isPlaying) {
+          sermonAudio.play().catch(() => {});
+        } else {
+          sermonAudio.pause();
+        }
+        // make sure any simulated interval is cleared
+        if (playInterval) { clearInterval(playInterval); playInterval = null; }
+      } else {
+        // Simulate progress for non-audio sermons
+        if (isPlaying) {
+          if (!playInterval) {
+            const progressSlider = document.getElementById('progressSlider');
+            playInterval = setInterval(() => {
+              let val = parseInt(progressSlider.value);
+              if (val >= 100) {
+                clearInterval(playInterval);
+                playInterval = null;
+                isPlaying = false;
+                updatePlayerUI();
+                return;
+              }
+              progressSlider.value = val + 1;
+              updateProgressFill(progressSlider);
+              updateTimeDisplay();
+            }, 1000);
+          }
+        } else {
+          if (playInterval) { clearInterval(playInterval); playInterval = null; }
+        }
+      }
+    }
+    
+    document.getElementById('playerToggle').addEventListener('click', () => {
+      if (!currentPlayingSermon) return;
+      const sermon = currentPlayingSermon.sermon;
+      if (sermon && sermon.audio) {
+        if (sermonAudio.paused) { sermonAudio.play(); isPlaying = true; }
+        else { sermonAudio.pause(); isPlaying = false; }
+      } else {
+        isPlaying = !isPlaying;
+      }
+      updatePlayerUI();
+    });
+    
+    function updateTimeDisplay() {
+      if (!currentPlayingSermon) return;
+      const progressSlider = document.getElementById('progressSlider');
+      const currentTimeEl = document.getElementById('currentTime');
+      const totalTimeEl = document.getElementById('totalTime');
+
+      const sermon = currentPlayingSermon.sermon;
+      if (sermon && sermon.audio && sermonAudio.duration) {
+        const currentSec = Math.floor(sermonAudio.currentTime);
+        const totalSec = Math.floor(sermonAudio.duration);
+        currentTimeEl.textContent = formatTime(currentSec);
+        totalTimeEl.textContent = formatTime(totalSec);
+      } else {
+        const totalSec = sermon.durationSec || 0;
+        const currentSec = Math.floor((parseInt(progressSlider.value) / 100) * totalSec);
+        currentTimeEl.textContent = formatTime(currentSec);
+        totalTimeEl.textContent = formatTime(totalSec);
+      }
+      updateProgressFill(progressSlider);
+    }
+    
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    // ============================
+    // YEAR FILTER
+    // ============================
+    const yearBtns = document.querySelectorAll('.year-btn');
+    yearBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        yearBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentYear = parseInt(btn.dataset.year);
+        renderMonths();
+      });
+    });
+
+    // ============================
+    // SEARCH
+    // ============================
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+      const grid = document.getElementById('monthsGrid');
+      
+      if (!query) {
+        renderMonths();
+        return;
+      }
+      
+      const yearData = sermonData[currentYear];
+      let found = false;
+      
+      monthNames.forEach((month, index) => {
+        if (!yearData[month]) return;
+        const data = yearData[month];
+        const hasMatch = data.sermons.some(s => 
+          s.title.toLowerCase().includes(query) || 
+          s.preacher.toLowerCase().includes(query) ||
+          s.date.toLowerCase().includes(query)
+        ) || data.theme.toLowerCase().includes(query) || monthLabels[index].toLowerCase().includes(query);
+        
+        const card = grid.children[index];
+        if (card) {
+          if (hasMatch) {
+            card.style.display = '';
+            found = true;
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    });
+
+    // ============================
+    // KEYBOARD SHORTCUTS
+    // ============================
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // ============================
+    // INIT
+    // ============================
+    renderMonths();
+  </script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCCG Jesus House Area - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-800 bg-white antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="img/favicon.png" 
+         alt="RCCG Jesus House Area Logo" 
+         class="w-10 h-10 object-contain">
+          <div class="flex flex-col">
+            <span class="text-xl font-bold text-blue-900 leading-none">RCCG</span>
+            <span class="text-sm font-medium text-slate-500 leading-none mt-0.5">Jesus House Area</span>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="nav-link text-sm font-semibold text-slate-600 hover:text-amber-500 transition-colors">Home</a>
+          <a href="#about" class="nav-link text-sm font-semibold text-slate-600 hover:text-amber-500 transition-colors">About Us</a>
+          <a href="#services" class="nav-link text-sm font-semibold text-slate-600 hover:text-amber-500 transition-colors">Services</a>
+          <a href="#ministries" class="nav-link text-sm font-semibold text-slate-600 hover:text-amber-500 transition-colors">Ministries</a>
+          <a href="#give" class="nav-link text-sm font-semibold text-slate-600 hover:text-amber-500 transition-colors">Give</a>
+          <a href="#contact" class="nav-link px-5 py-2.5 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-amber-500 transition-colors">Contact</a>
+        </div>
+
+        <!-- Mobile button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-900">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
+      <div class="px-4 pt-2 pb-6 space-y-1">
+        <a href="#home" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-blue-900 hover:bg-slate-50 rounded-md">Home</a>
+        <a href="#about" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-blue-900 hover:bg-slate-50 rounded-md">About Us</a>
+        <a href="#services" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-blue-900 hover:bg-slate-50 rounded-md">Services</a>
+        <a href="#ministries" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-blue-900 hover:bg-slate-50 rounded-md">Ministries</a>
+        <a href="#give" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-blue-900 hover:bg-slate-50 rounded-md">Give</a>
+        <a href="#contact" class="block px-3 py-3 text-base font-medium text-blue-900 bg-slate-50 rounded-md">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Home -->
+  <section id="home" class="relative min-h-screen flex items-center pt-20">
+    <div class="absolute inset-0 z-0">
+      <img src="img/hero2.jpeg" alt="Worship gathering" class="w-full h-full object-cover">
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="max-w-3xl fade-in-up visible">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-amber-400 text-sm font-medium mb-6 border border-white/20">
+          <i data-lucide="cross" class="w-4 h-4"></i>
+          <span>Jesus Christ the Same Yesterday, Today and Forever</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+          Welcome to <span class="text-amber-400">RCCG</span><br>Jesus House Area
+        </h1>
+        <p class="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl">
+          A vibrant community of believers committed to worship, fellowship, and raising champions for Christ. Join us as we grow together in faith and love.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#services" class="px-8 py-4 bg-amber-500 text-blue-900 font-bold rounded-lg hover:bg-amber-400 transition-colors flex items-center gap-2">
+            <i data-lucide="calendar-days" class="w-5 h-5"></i>
+            Join Our Services
+          </a>
+          <a href="#about" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-lg hover:bg-white/20 transition-colors border border-white/20 flex items-center gap-2">
+            <i data-lucide="info" class="w-5 h-5"></i>
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="relative fade-in-up">
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-500/10 rounded-full blur-xl"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-900/10 rounded-full blur-xl"></div>
+          <img src="img/About1.jpeg" alt="Church family" class="relative rounded-2xl shadow-xl w-full object-cover">
+          <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg hidden md:block">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-blue-900">500+</p>
+                <p class="text-sm text-slate-500">Members</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fade-in-up">
+          <div class="inline-flex items-center gap-2 text-amber-600 font-semibold mb-4">
+            <span class="w-8 h-0.5 bg-amber-500"></span>
+            About Us
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-6">Growing in Christ, Impacting Lives</h2>
+          <p class="text-slate-600 text-lg leading-relaxed mb-6">
+            RCCG Jesus House Area is a family of faith committed to helping people grow in Christ and fulfill God’s purpose for their lives. As part of The Redeemed Christian Church of God, we are passionate about worship, prayer, discipleship, and sharing the love of Christ with our community.
+          </p>
+          <p class="text-slate-600 text-lg leading-relaxed mb-8">
+            We are committed to the vision of RCCG: to make heaven and take as many people as possible with us, through the preaching of the Gospel, holy living, and impacting lives for Christ.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white shrink-0">
+                <i data-lucide="book-open" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Bible-Based</h4>
+                <p class="text-sm text-slate-500">Sound teaching from the Scriptures</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white shrink-0">
+                <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Community</h4>
+                <p class="text-sm text-slate-500">Loving fellowship and support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+        <div class="inline-flex items-center gap-2 text-amber-600 font-semibold mb-4">
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+          Our Services
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Join Us in Worship</h2>
+        <p class="text-slate-600 text-lg">We gather throughout the week to praise God, study His Word, and encourage one another in faith.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow fade-in-up">
+          <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-900 mb-6">
+            <i data-lucide="sun" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-2">Sunday Service</h3>
+          <p class="text-slate-500 mb-4">Our main worship service with praise, worship, and powerful teaching.</p>
+          <div class="flex items-center gap-2 text-amber-600 font-semibold">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>Sundays, 7:00 AM</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow fade-in-up">
+          <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-900 mb-6">
+            <i data-lucide="book-marked" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-2">Digging Deep</h3>
+          <p class="text-slate-500 mb-4">In-depth Bible study and exposition of the Word of God.</p>
+          <div class="flex items-center gap-2 text-amber-600 font-semibold">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>Tuesdays, 6:00 PM</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow fade-in-up">
+          <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-900 mb-6">
+            <i data-lucide="flame" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-2">Prayer Meeting</h3>
+          <p class="text-slate-500 mb-4">A time of intense prayer, intercession, and spiritual refreshing.</p>
+          <div class="flex items-center gap-2 text-amber-600 font-semibold">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>Wednesdays, 6:00 PM</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow fade-in-up">
+          <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-900 mb-6">
+            <i data-lucide="star" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-2">Faith Clinic</h3>
+          <p class="text-slate-500 mb-4">A time of fervent prayers, faith-building, and seeking God's intervention in every area of life.</p>
+          <div class="flex items-center gap-2 text-amber-600 font-semibold">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>Thursdays, 6:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministries -->
+  <section id="ministries" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+        <div class="inline-flex items-center gap-2 text-amber-600 font-semibold mb-4">
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+          Ministries
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Find Your Place to Serve</h2>
+        <p class="text-slate-600 text-lg">We have a ministry for every age group and interest. Get involved and grow with us.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="user" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Men of Valor</h3>
+          <p class="text-slate-500 text-sm">Equipping men to lead their families and community with integrity and faith.</p>
+        </div>
+
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="flower-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Women of Worth</h3>
+          <p class="text-slate-500 text-sm">Empowering women to fulfill their God-given purpose in every sphere of life.</p>
+        </div>
+
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="flame" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Youth Church</h3>
+          <p class="text-slate-500 text-sm">A dynamic space for young people to encounter God and build lasting friendships.</p>
+        </div>
+
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="smile" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Children Church</h3>
+          <p class="text-slate-500 text-sm">Raising godly seeds through fun, interactive, and spirit-filled lessons.</p>
+        </div>
+
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="music" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Worship & Choir</h3>
+          <p class="text-slate-500 text-sm">Leading the congregation into God's presence through praise and worship.</p>
+        </div>
+
+        <div class="group p-6 rounded-2xl border border-slate-100 hover:border-blue-900/20 hover:shadow-lg transition-all bg-white fade-in-up">
+          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="globe" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">Evangelism & Missions</h3>
+          <p class="text-slate-500 text-sm">Reaching the unreached and spreading the love of Christ beyond our walls.</p>
+        </div>
+      </div>
+
+      <!-- Sermons CTA -->
+      <div class="relative overflow-hidden rounded-2xl bg-blue-900 p-8 md:p-12 fade-in-up">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div class="flex items-start gap-6">
+            <div class="w-16 h-16 bg-white/10 rounded-xl flex items-center justify-center text-amber-400 shrink-0">
+              <i data-lucide="headphones" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-2">Listen to Past Preachings</h3>
+              <p class="text-slate-300 max-w-xl">Couldn’t make it to service? Want to revisit a powerful message? Explore our archive of sermons from our Pastor and guest ministers.</p>
+            </div>
+          </div>
+          <a href="sermons.html" class="px-8 py-4 bg-amber-500 text-blue-900 font-bold rounded-lg hover:bg-amber-400 transition-colors whitespace-nowrap flex items-center gap-2">
+            <i data-lucide="play-circle" class="w-5 h-5"></i>
+            Go to Sermons
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Give -->
+  <section id="give" class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="fade-in-up">
+          <div class="inline-flex items-center gap-2 text-amber-600 font-semibold mb-4">
+            <span class="w-8 h-0.5 bg-amber-500"></span>
+            Give
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-6">Give with a Cheerful Heart</h2>
+          <p class="text-slate-600 text-lg leading-relaxed mb-6">
+            "Bring ye all the tithes into the storehouse, that there may be meat in mine house, and prove me now herewith, saith the LORD of hosts..." <span class="text-blue-900 font-semibold">— Malachi 3:10</span>
+          </p>
+          <p class="text-slate-600 text-lg leading-relaxed mb-8">
+            Your giving helps us spread the Gospel, support community outreach, maintain our facilities, and bless those in need. Every seed sown into this ministry is an investment in God's Kingdom.
+          </p>
+          <div class="bg-white p-6 rounded-xl border border-slate-200 mb-6">
+            <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <i data-lucide="building-2" class="w-5 h-5 text-blue-900"></i>
+              Select Account Type
+            </h4>
+            
+            <!-- Account Type Selector -->
+            <div class="flex gap-4 mb-6">
+              <button onclick="switchAccount('main')" id="main-btn" class="flex-1 px-4 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors active-account">
+                Main Account
+              </button>
+              <button onclick="switchAccount('rebate')" id="rebate-btn" class="flex-1 px-4 py-3 bg-slate-200 text-slate-600 font-semibold rounded-lg hover:bg-slate-300 transition-colors">
+                Rebate Account
+              </button>
+            </div>
+
+            <!-- Main Account Details -->
+            <div id="main-details" class="space-y-3 text-slate-600 account-details">
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Bank Name</span>
+                <span class="font-semibold text-slate-800">Zenith Bank</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Account Name</span>
+                <span class="font-semibold text-slate-800">Jesus House Area (Main Account)</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Account Number</span>
+                <span class="font-semibold text-slate-800">1014174958</span>
+              </div>
+            </div>
+
+            <!-- Rebate Account Details -->
+            <div id="rebate-details" class="space-y-3 text-slate-600 account-details hidden">
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Bank Name</span>
+                <span class="font-semibold text-slate-800">Zenith Bank</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Account Name</span>
+                <span class="font-semibold text-slate-800">Jesus House Area (Rebate Account)</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Account Number</span>
+                <span class="font-semibold text-slate-800">1014767589</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" onclick="alert('Online giving portal coming soon!')" class="inline-flex items-center gap-2 px-8 py-4 bg-blue-900 text-white font-bold rounded-lg hover:bg-amber-500 transition-colors">
+            <i data-lucide="credit-card" class="w-5 h-5"></i>
+            Give Online
+          </a>
+        </div>
+        <div class="relative fade-in-up">
+          <img src="img/give.jpg" alt="Giving" class="rounded-2xl shadow-xl w-full object-cover">
+          <div class="absolute -bottom-6 -left-6 bg-amber-500 p-6 rounded-xl shadow-lg hidden md:block">
+            <div class="text-center">
+              <p class="text-white text-sm font-medium mb-1">Secure & Safe</p>
+              <p class="text-blue-900 font-bold">SSL Encrypted</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+        <div class="inline-flex items-center gap-2 text-amber-600 font-semibold mb-4">
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+          Contact
+          <span class="w-8 h-0.5 bg-amber-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Get in Touch</h2>
+        <p class="text-slate-600 text-lg">We would love to hear from you. Visit us, send a message, or reach out through any of our channels.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 fade-in-up">
+          <form id="contactForm" action="https://formspree.io/f/xpqnegyz" method="POST" class="space-y-6">
+            <div id="contactStatus" class="hidden rounded-3xl border border-blue-900/10 bg-blue-50 p-4 text-blue-900 text-sm font-semibold shadow-sm transition-all duration-300 ease-out">
+              <div class="flex items-center gap-3">
+                <span id="contactStatusIcon" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-900 text-white text-lg animate-pulse">✓</span>
+                <div>
+                  <p id="contactStatusText">Your message has been sent successfully. We will reply soon.</p>
+                  <p class="text-slate-600 text-xs mt-1">Thanks for reaching out — your request is on its way.</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 outline-none transition-all" placeholder="John Doe">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 outline-none transition-all" placeholder="john@example.com">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
+              <input type="tel" name="phone" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 outline-none transition-all" placeholder="+234 800 000 0000">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+              <textarea name="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 outline-none transition-all" placeholder="How can we help you?"></textarea>
+            </div>
+            <button type="submit" class="w-full py-4 bg-blue-900 text-white font-bold rounded-lg hover:bg-amber-500 transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-5 h-5"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Map & Info -->
+        <div class="space-y-6 fade-in-up">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-5 h-5 text-amber-500"></i>
+              Church Location
+            </h3>
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d278.1083735501035!2d3.580299684053379!3d6.488460466361255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf124aa3a1bd9%3A0x1d8480bcd66d1967!2sRedeemed%20Christian%20Church%20of%20God%2C%20Jesus%20House!5e0!3m2!1sen!2sng!4v1738673600983!5m2!1sen!2sng" 
+              class="w-full h-72 rounded-xl border-0"
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+          </div>
+          
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-white p-6 rounded-xl border border-slate-100 flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800 text-sm">Address</p>
+                <p class="text-slate-500 text-sm mt-1">RCCG Jesus House Area, Beside Giggles Place, Oke-ira-nla, Addo Road, Ajah, Lagos.</p>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800 text-sm">Phone</p>
+                <p class="text-slate-500 text-sm mt-1">+234 803 852 7686</p>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 shrink-0">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800 text-sm">Email</p>
+                <p class="text-slate-500 text-sm mt-1">info@rccgjesushouse.org</p>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-900 shrink-0">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800 text-sm">Service Hours</p>
+                <p class="text-slate-500 text-sm mt-1">Sun: 7AM | Tue & Thu: 6PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="img/favicon.png" 
+              alt="RCCG Jesus House Area Logo" 
+              class="w-10 h-10 object-contain">
+            <div class="flex flex-col">
+              <span class="text-xl font-bold leading-none">RCCG</span>
+              <span class="text-sm text-slate-300 leading-none mt-0.5">Jesus House Area</span>
+            </div>
+          </div>
+          <p class="text-slate-300 max-w-sm mb-6">
+            Making heaven and taking as many people as we can with us. Join our family today and experience the love of Christ.
+          </p>
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/share/1CmZk7XhvF/" target="_blank" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-amber-500 hover:text-blue-900 transition-colors">
+              <i class="fab fa-facebook-f w-5 h-5"></i>
+            </a>
+            <a href="#" target="_blank" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-amber-500 hover:text-blue-900 transition-colors">
+              <i class="fab fa-instagram w-5 h-5"></i>
+            </a>
+            <a href="#" target="_blank" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-amber-500 hover:text-blue-900 transition-colors">
+              <i class="fab fa-youtube w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a href="#about" class="hover:text-amber-400 transition-colors">About Us</a></li>
+            <li><a href="#services" class="hover:text-amber-400 transition-colors">Services</a></li>
+            <li><a href="#ministries" class="hover:text-amber-400 transition-colors">Ministries</a></li>
+            <li><a href="sermons.html" class="hover:text-amber-400 transition-colors">Sermons</a></li>
+            <li><a href="#give" class="hover:text-amber-400 transition-colors">Give</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Contact</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 mt-1 shrink-0 text-amber-400"></i>
+              <span>Beside Giggles Place, Oke-ira-nla, Ajah, Lagos.</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 shrink-0 text-amber-400"></i>
+              <span>+234 803 852 7686</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 shrink-0 text-amber-400"></i>
+              <span>info@rccgjesushouse.org</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 text-center text-slate-400 text-sm">
+        <p>© <span class="year-span">2024</span> RCCG Jesus House Area. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>lucide.createIcons();</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactForm = document.getElementById('contactForm');
+      const contactStatus = document.getElementById('contactStatus');
+      const contactStatusText = document.getElementById('contactStatusText');
+      const contactStatusIcon = document.getElementById('contactStatusIcon');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          contactStatus.classList.remove('hidden');
+          contactStatus.classList.remove('border-rose-200', 'bg-rose-50', 'text-rose-900');
+          contactStatus.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-700');
+          contactStatusIcon.textContent = '⌛';
+          contactStatusIcon.classList.remove('bg-blue-900', 'bg-rose-600');
+          contactStatusIcon.classList.add('bg-slate-400');
+          contactStatusText.textContent = 'Sending your message...';
+
+          const formData = new FormData(contactForm);
+
+          try {
+            const response = await fetch(contactForm.action, {
+              method: contactForm.method,
+              body: formData,
+              headers: {
+                Accept: 'application/json'
+              }
+            });
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            contactForm.reset();
+            contactStatus.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-700');
+            contactStatus.classList.add('border-blue-900/10', 'bg-blue-50', 'text-blue-900');
+            contactStatusIcon.textContent = '✓';
+            contactStatusIcon.classList.remove('bg-slate-400');
+            contactStatusIcon.classList.add('bg-blue-900');
+            contactStatusText.textContent = 'Success! Your message has been sent.';
+          } catch (error) {
+            contactStatus.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-700');
+            contactStatus.classList.add('border-rose-200', 'bg-rose-50', 'text-rose-900');
+            contactStatusIcon.textContent = '!';
+            contactStatusIcon.classList.remove('bg-slate-400', 'bg-blue-900');
+            contactStatusIcon.classList.add('bg-rose-600');
+            contactStatusText.textContent = 'Submission failed. Please try again later.';
+          }
+        });
+      }
+    });
+
+    function switchAccount(type) {
+      const mainDetails = document.getElementById('main-details');
+      const rebateDetails = document.getElementById('rebate-details');
+      const mainBtn = document.getElementById('main-btn');
+      const rebateBtn = document.getElementById('rebate-btn');
+      
+      if (type === 'main') {
+        mainDetails.classList.remove('hidden');
+        rebateDetails.classList.add('hidden');
+        mainBtn.classList.add('active-account');
+        mainBtn.classList.remove('bg-slate-200', 'text-slate-600', 'hover:bg-slate-300');
+        mainBtn.classList.add('bg-blue-900', 'text-white');
+        rebateBtn.classList.remove('active-account');
+        rebateBtn.classList.add('bg-slate-200', 'text-slate-600');
+        rebateBtn.classList.remove('bg-blue-900', 'text-white');
+      } else if (type === 'rebate') {
+        mainDetails.classList.add('hidden');
+        rebateDetails.classList.remove('hidden');
+        rebateBtn.classList.add('active-account');
+        rebateBtn.classList.remove('bg-slate-200', 'text-slate-600', 'hover:bg-slate-300');
+        rebateBtn.classList.add('bg-blue-900', 'text-white');
+        mainBtn.classList.remove('active-account');
+        mainBtn.classList.add('bg-slate-200', 'text-slate-600');
+        mainBtn.classList.remove('bg-blue-900', 'text-white');
+      }
+    }
+  </script>
+</body>
+</html>

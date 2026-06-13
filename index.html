@@ -16,6 +16,18 @@
     html {
       scroll-behavior: smooth;
     }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="font-sans text-slate-800 bg-white antialiased">

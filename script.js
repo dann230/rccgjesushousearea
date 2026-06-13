@@ -52,6 +52,27 @@ document.addEventListener('DOMContentLoaded', function() {
   // Listen for scroll events
   window.addEventListener('scroll', setActiveLink);
   
+  // Reveal fade-in-up elements when they enter the viewport
+  const revealElements = document.querySelectorAll('.fade-in-up');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
+  });
+
+  revealElements.forEach(element => {
+    if (element.classList.contains('visible')) {
+      return;
+    }
+    revealObserver.observe(element);
+  });
+  
   // Set active link on page load
   setActiveLink();
 });

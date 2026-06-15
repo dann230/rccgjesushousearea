@@ -73,6 +73,29 @@ document.addEventListener('DOMContentLoaded', function() {
     revealObserver.observe(element);
   });
   
+  // Hero background slider + parallax
+  const heroBg = document.getElementById('hero-bg');
+  const heroSection = document.getElementById('home');
+  if (heroBg) {
+    const heroImages = [
+      'img/hero3.jpg',
+      'img/hero4.jpeg',
+      'img/hero5.jpeg',
+      'img/hero6.jpeg',
+      'img/hero7.jpeg'
+    ];
+    let heroIndex = 0;
+
+    setInterval(() => {
+      heroIndex = (heroIndex + 1) % heroImages.length;
+      heroBg.style.opacity = '0';
+      setTimeout(() => {
+        heroBg.style.backgroundImage = `url('${heroImages[heroIndex]}')`;
+        heroBg.style.opacity = '1';
+      }, 500);
+    }, 6000);
+  }
+
   // Set active link on page load
   setActiveLink();
 });

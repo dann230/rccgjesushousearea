@@ -1,0 +1,22 @@
+html {
+  scroll-behavior: smooth;
+}
+
+#home {
+  min-height: calc(100vh - 5rem);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  transition: opacity 1s ease-in-out;
+  will-change: opacity;
+}
+
+.hero-overlay {
+  background: rgba(15, 23, 42, 0.45);
+}

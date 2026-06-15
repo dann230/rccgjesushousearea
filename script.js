@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const heroSection = document.getElementById('home');
   if (heroBg) {
     const heroImages = [
+      'img/hero2.jpeg',
       'img/hero3.jpg',
       'img/hero4.jpeg',
       'img/hero5.jpeg',

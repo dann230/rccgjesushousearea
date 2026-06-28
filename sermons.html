@@ -379,13 +379,13 @@
           ]
         },
         june: {
-          theme: "Empowered for Impact",
+          theme: "Looking Forward to New Level",
           image: "img/Theme/June2026.jpeg",
           sermons: [
             { date: "June 7, 2026", title: "Divine Partnership", preacher: "Pastor E.A Adeboye", duration: "51 min", durationSec: 2940, audio: "aud/June thanksgiving.mp3" },
             { date: "June 14, 2026", title: "Pentecost: Power from On High", preacher: "Pastor Francis Angbo", duration: "52 min", durationSec: 3120 },
-            { date: "June 21, 2026", title: "Gifts of the Spirit", preacher: "Deacon Moses", duration: "44 min", durationSec: 2640 },
-            { date: "June 28, 2026", title: "Operating in His Power", preacher: "Pastor Francis Angbo", duration: "46 min", durationSec: 2760 }
+            { date: "June 21, 2026", title: "The Father As A Husband", preacher: "Pastor Francis Angbo", duration: "44 min", durationSec: 2640, audio: "aud/The Father as a Husband.aac" },
+            { date: "June 28, 2026", title: "Breaking Forth into the Next Level", preacher: "Deaconess Angbo", duration: "46 min", durationSec: 2760, audio: "aud/Breaking Forth into the Next Level.mp3", note: "Teenagers' Sunday / Teen Program" }
           ]
         },
         july: {
@@ -765,6 +765,7 @@
           <div class="flex-1 min-w-0">
             <h4 class="text-sm sm:text-base font-semibold text-church-blue truncate">${sermon.title}</h4>
             <p class="text-xs text-gray-400 mt-0.5">${sermon.preacher} · ${sermon.date}</p>
+            ${sermon.note ? `<p class="text-[11px] text-amber-600 font-semibold mt-1 flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i>${sermon.note}</p>` : ''}
           </div>
           <div class="text-right shrink-0 hidden sm:block">
             <span class="text-xs text-gray-400">${sermon.duration}</span>

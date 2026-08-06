@@ -123,6 +123,29 @@
     .audio-bar:nth-child(4) { animation-delay: 0.3s; height: 16px; }
     .audio-bar:nth-child(5) { animation-delay: 0.4s; height: 10px; }
 
+    .sermon-preview-video {
+      width: 140px;
+      height: 80px;
+      object-fit: cover;
+      background: #f8fafc;
+    }
+
+    #videoPlayerContainer.mini-mode {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      width: min(420px, calc(100vw - 2rem));
+      max-width: 420px;
+      z-index: 70;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.24);
+    }
+    #videoPlayerContainer.mini-mode .bg-white\/10 {
+      padding: 1rem;
+    }
+    #videoPlayerContainer.mini-mode video {
+      height: 220px;
+    }
+
     @keyframes audio-wave {
       0%, 100% { transform: scaleY(0.5); }
       50% { transform: scaleY(1); }
@@ -252,6 +275,23 @@
                   <span id="totalTime" class="text-white/40 text-xs">0:00</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Player (Initially Hidden) -->
+      <div id="videoPlayerContainer" class="hidden mt-8 max-w-2xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+          <video id="sermonVideo" class="w-full rounded-2xl" controls preload="metadata"></video>
+          <div class="mt-4 text-white/80 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p id="videoPlayerTitle" class="text-sm font-semibold truncate">Select a sermon</p>
+              <p id="videoPlayerPreacher" class="text-xs mt-1">—</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="toggleMiniMode" type="button" class="px-3 py-1.5 bg-church-blue text-white text-xs rounded-full hover:bg-church-blue-light transition">Mini mode</button>
+              <button id="fullscreenBtn" type="button" class="px-3 py-1.5 bg-church-gold text-church-blue-dark text-xs rounded-full hover:bg-amber-400 transition">Fullscreen</button>
             </div>
           </div>
         </div>
@@ -390,12 +430,12 @@
         },
         july: {
           theme: "I win in Jesus' Name",
-          image: "img/Theme/July2026.jpeg",
+          image: "img/Theme/July2026.jpg",
           sermons: [
             { date: "July 5, 2026", title: "Jehovah Jireh: The Lord Provides", preacher: "Pastor E.A Adeboye", duration: "42 min", durationSec: 2520 },
             { date: "July 12, 2026", title: "Discipline", preacher: "Pastor Francis Angbo", duration: "36 min", durationSec: 2160, audio: "aud/Discipline.mp3" },
             { date: "July 19, 2026", title: "My Winning is Non-Negotiable", preacher: "Bro Dominic", duration: "47 min", durationSec: 2820, audio: "aud/Non_negotiable.mp3", note: "Youth's Sunday" },
-            { date: "July 26, 2026", title: "Trusting God's Timing", preacher: "Pastor Usman", duration: "40 min", durationSec: 2400 }
+            { date: "July 26, 2026", title: "Whose Daughter are you?", preacher: "DCNS Joy James", duration: "59 min", durationSec: 2400, audio: "aud/women_programme.mp3", note: "Women's Programme" }
           ]
         },
         august: {
@@ -617,9 +657,12 @@
     let currentPlayingSermon = null;
     let isPlaying = false;
     let playInterval = null;
+    let isMiniMode = false;
     // Audio element for real sermon files
     const sermonAudio = new Audio();
     sermonAudio.preload = 'metadata';
+    const sermonVideo = document.getElementById('sermonVideo');
+
     sermonAudio.addEventListener('loadedmetadata', () => {
       if (currentPlayingSermon && currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
         updateTimeDisplay();
@@ -639,6 +682,16 @@
       isPlaying = false;
       updatePlayerUI();
     });
+
+    if (sermonVideo) {
+      sermonVideo.addEventListener('ended', () => {
+        isPlaying = false;
+        updatePlayerUI();
+      });
+      sermonVideo.addEventListener('error', () => {
+        console.warn('Video failed to load', sermonVideo.error);
+      });
+    }
 
     const progressSlider = document.getElementById('progressSlider');
     const updateProgressFill = (slider) => {
@@ -664,6 +717,39 @@
       progressSlider.addEventListener('input', seekAudio);
       progressSlider.addEventListener('change', seekAudio);
       updateProgressFill(progressSlider);
+    }
+
+    function hideAudioPlayer() {
+      document.getElementById('audioPlayerContainer').classList.add('hidden');
+      document.getElementById('playerTitle').textContent = 'Select a sermon';
+      document.getElementById('playerPreacher').textContent = '—';
+      if (!sermonAudio.paused) sermonAudio.pause();
+    }
+
+    function hideVideoPlayer() {
+      const videoContainer = document.getElementById('videoPlayerContainer');
+      videoContainer.classList.add('hidden');
+      videoContainer.classList.remove('mini-mode');
+      isMiniMode = false;
+      if (sermonVideo) {
+        sermonVideo.pause();
+        sermonVideo.removeAttribute('src');
+        sermonVideo.load();
+      }
+      document.getElementById('videoPlayerTitle').textContent = 'Select a sermon';
+      document.getElementById('videoPlayerPreacher').textContent = '—';
+      const miniBtn = document.getElementById('toggleMiniMode');
+      if (miniBtn) miniBtn.textContent = 'Mini mode';
+    }
+
+    function showAudioPlayer() {
+      document.getElementById('audioPlayerContainer').classList.remove('hidden');
+      document.getElementById('videoPlayerContainer').classList.add('hidden');
+    }
+
+    function showVideoPlayer() {
+      document.getElementById('videoPlayerContainer').classList.remove('hidden');
+      document.getElementById('audioPlayerContainer').classList.add('hidden');
     }
 
     const monthNames = ['january','february','march','april','may','june','july','august','september','october','november','december'];
@@ -766,6 +852,12 @@
             <h4 class="text-sm sm:text-base font-semibold text-church-blue truncate">${sermon.title}</h4>
             <p class="text-xs text-gray-400 mt-0.5">${sermon.preacher} · ${sermon.date}</p>
             ${sermon.note ? `<p class="text-[11px] text-amber-600 font-semibold mt-1 flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i>${sermon.note}</p>` : ''}
+            ${sermon.video ? `
+              <div class="mt-3 flex items-center gap-3">
+                <video muted playsinline preload="metadata" class="sermon-preview-video rounded-xl bg-slate-100 border border-gray-200 shadow-sm"></video>
+                <span class="text-amber-600 text-[11px] font-semibold uppercase tracking-wider">Video preview</span>
+              </div>
+            ` : ''}
           </div>
           <div class="text-right shrink-0 hidden sm:block">
             <span class="text-xs text-gray-400">${sermon.duration}</span>
@@ -778,6 +870,18 @@
           playSermon(sermon, month, idx);
         });
         item.addEventListener('click', () => playSermon(sermon, month, idx));
+
+        const preview = item.querySelector('video.sermon-preview-video');
+        if (preview && sermon.video) {
+          preview.src = sermon.video;
+          preview.muted = true;
+          preview.loop = true;
+          preview.playsInline = true;
+          preview.controls = false;
+          preview.addEventListener('mouseenter', () => preview.play().catch(() => {}));
+          preview.addEventListener('mouseleave', () => preview.pause());
+          preview.style.pointerEvents = 'none';
+        }
         
         list.appendChild(item);
       });
@@ -808,12 +912,17 @@
       const waveContainer = document.getElementById('audioWaveContainer');
       const progressSlider = document.getElementById('progressSlider');
       
-      playerContainer.classList.remove('hidden');
-      
       // If clicking the same sermon, toggle play/pause
       if (currentPlayingSermon && currentPlayingSermon.month === month && currentPlayingSermon.year === currentYear && currentPlayingSermon.index === idx) {
-        // Toggle play/pause for same sermon
-        if (currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
+        if (sermon.video && sermonVideo) {
+          if (sermonVideo.paused) {
+            sermonVideo.play();
+            isPlaying = true;
+          } else {
+            sermonVideo.pause();
+            isPlaying = false;
+          }
+        } else if (currentPlayingSermon.sermon && currentPlayingSermon.sermon.audio) {
           if (sermonAudio.paused) {
             sermonAudio.play();
             isPlaying = true;
@@ -835,22 +944,36 @@
       playerTitle.textContent = sermon.title;
       playerPreacher.textContent = sermon.preacher + ' · ' + sermon.date;
       progressSlider.value = 0;
+      hideVideoPlayer();
+      hideAudioPlayer();
 
-      // If sermon has a real audio file, load and play it
-      if (sermon.audio) {
-        try {
-          sermonAudio.src = sermon.audio;
-          sermonAudio.currentTime = 0;
-          sermonAudio.play();
-        } catch (err) {
-          console.warn('Error loading sermon audio', err);
+      if (sermon.video && sermonVideo) {
+        showVideoPlayer();
+        sermonVideo.src = sermon.video;
+        sermonVideo.muted = true;
+        sermonVideo.load();
+        sermonVideo.currentTime = 0;
+        sermonVideo.play().catch((err) => { console.warn('Video play failed', err); });
+        document.getElementById('videoPlayerTitle').textContent = sermon.title;
+        document.getElementById('videoPlayerPreacher').textContent = sermon.preacher + ' · ' + sermon.date;
+      } else {
+        showAudioPlayer();
+        if (sermon.audio) {
+          try {
+            sermonAudio.src = sermon.audio;
+            sermonAudio.currentTime = 0;
+            sermonAudio.play();
+          } catch (err) {
+            console.warn('Error loading sermon audio', err);
+          }
         }
       }
 
       updatePlayerUI();
 
-      // Scroll to player
-      playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Scroll to active player
+      const activePlayer = sermon.video ? document.getElementById('videoPlayerContainer') : playerContainer;
+      activePlayer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       // Re-render modal content to update playing states
       const monthIndex = monthNames.indexOf(month);
@@ -861,6 +984,24 @@
       const playerIcon = document.getElementById('playerIcon');
       const toggleBtn = document.getElementById('playerToggle');
       const waveContainer = document.getElementById('audioWaveContainer');
+
+      if (currentPlayingSermon && currentPlayingSermon.sermon && currentPlayingSermon.sermon.video) {
+        showVideoPlayer();
+        hideAudioPlayer();
+        if (sermonVideo) {
+          if (isPlaying) {
+            sermonVideo.play().catch(() => {});
+            playerIcon.setAttribute('data-lucide', 'pause');
+            toggleBtn.classList.add('playing');
+          } else {
+            sermonVideo.pause();
+            playerIcon.setAttribute('data-lucide', 'play');
+            toggleBtn.classList.remove('playing');
+          }
+        }
+        lucide.createIcons();
+        return;
+      }
 
       if (isPlaying) {
         playerIcon.setAttribute('data-lucide', 'pause');
@@ -910,7 +1051,10 @@
     document.getElementById('playerToggle').addEventListener('click', () => {
       if (!currentPlayingSermon) return;
       const sermon = currentPlayingSermon.sermon;
-      if (sermon && sermon.audio) {
+      if (sermon && sermon.video && sermonVideo) {
+        if (sermonVideo.paused) { sermonVideo.play(); isPlaying = true; }
+        else { sermonVideo.pause(); isPlaying = false; }
+      } else if (sermon && sermon.audio) {
         if (sermonAudio.paused) { sermonAudio.play(); isPlaying = true; }
         else { sermonAudio.pause(); isPlaying = false; }
       } else {
@@ -918,6 +1062,35 @@
       }
       updatePlayerUI();
     });
+
+    const miniBtn = document.getElementById('toggleMiniMode');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    if (miniBtn) {
+      miniBtn.addEventListener('click', () => {
+        const videoContainer = document.getElementById('videoPlayerContainer');
+        isMiniMode = !isMiniMode;
+        if (isMiniMode) {
+          videoContainer.classList.add('mini-mode');
+          miniBtn.textContent = 'Normal size';
+        } else {
+          videoContainer.classList.remove('mini-mode');
+          miniBtn.textContent = 'Mini mode';
+        }
+      });
+    }
+
+    if (fullscreenBtn && sermonVideo) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (sermonVideo.requestFullscreen) {
+          sermonVideo.requestFullscreen();
+        } else if (sermonVideo.webkitRequestFullscreen) {
+          sermonVideo.webkitRequestFullscreen();
+        } else if (sermonVideo.msRequestFullscreen) {
+          sermonVideo.msRequestFullscreen();
+        }
+      });
+    }
     
     function updateTimeDisplay() {
       if (!currentPlayingSermon) return;

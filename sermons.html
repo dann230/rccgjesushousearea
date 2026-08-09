@@ -432,18 +432,18 @@
           theme: "I win in Jesus' Name",
           image: "img/Theme/July2026.jpg",
           sermons: [
-            { date: "July 5, 2026", title: "Jehovah Jireh: The Lord Provides", preacher: "Pastor E.A Adeboye", duration: "42 min", durationSec: 2520 },
+            { date: "July 5, 2026", title: "Jehovah Jireh: The Lord Provides", preacher: "Pastor E.A Adeboye", duration: "42 min", durationSec: 2520, link: "https://www.youtube.com/live/Gj0r7nwPduU?si=6jJhBsWU7W7iDrtt" },
             { date: "July 12, 2026", title: "Discipline", preacher: "Pastor Francis Angbo", duration: "36 min", durationSec: 2160, audio: "aud/Discipline.mp3" },
             { date: "July 19, 2026", title: "My Winning is Non-Negotiable", preacher: "Bro Dominic", duration: "47 min", durationSec: 2820, audio: "aud/Non_negotiable.mp3", note: "Youth's Sunday" },
             { date: "July 26, 2026", title: "Whose Daughter are you?", preacher: "DCNS Joy James", duration: "59 min", durationSec: 2400, audio: "aud/women_programme.mp3", note: "Women's Programme" }
           ]
         },
         august: {
-          theme: "Family & Household Faith",
+          theme: "Lord, Here I Am",
           image: "img/Theme/August2026.jpg",
           sermons: [
-            { date: "August 2, 2026", title: "Building a Godly Home", preacher: "Pastor Francis Angbo", duration: "43 min", durationSec: 2580 },
-            { date: "August 9, 2026", title: "Husbands, Love Your Wives", preacher: "Pastor Francis Angbo", duration: "38 min", durationSec: 2280 },
+            { date: "August 2, 2026", title: "Divine Champions", preacher: "Pastor E.A Adeboye", duration: "49 min", durationSec: 2580, audio: "aud/Divine_champ.mp3", note: "Thanksgiving Service" },
+            { date: "August 9, 2026", title: "When we get to Heaven", preacher: "Pastor Ayo Adeloye", duration: "15 min", durationSec: 2280, audio: "aud/get_to_heaven.mp3", note: "RCCG HOLY GHOST CONVENTION 2026 - DAY 7" },
             { date: "August 16, 2026", title: "Raising Godly Children", preacher: "Deacon Moses", duration: "41 min", durationSec: 2460 },
             { date: "August 23, 2026", title: "As for Me and My House", preacher: "Deaconess Angbo", duration: "35 min", durationSec: 2100 },
             { date: "August 30, 2026", title: "Family Faith that Endures", preacher: "Pastor Francis Angbo", duration: "39 min", durationSec: 2340 }
@@ -852,6 +852,14 @@
             <h4 class="text-sm sm:text-base font-semibold text-church-blue truncate">${sermon.title}</h4>
             <p class="text-xs text-gray-400 mt-0.5">${sermon.preacher} · ${sermon.date}</p>
             ${sermon.note ? `<p class="text-[11px] text-amber-600 font-semibold mt-1 flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i>${sermon.note}</p>` : ''}
+            ${sermon.link ? `
+              <div class="mt-3">
+                <a href="${sermon.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-church-gold text-church-blue-dark text-xs font-semibold hover:bg-church-gold/10 transition">
+                  Listen on YouTube
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            ` : ''}
             ${sermon.video ? `
               <div class="mt-3 flex items-center gap-3">
                 <video muted playsinline preload="metadata" class="sermon-preview-video rounded-xl bg-slate-100 border border-gray-200 shadow-sm"></video>
@@ -865,11 +873,19 @@
           </div>
         `;
         
+        const openOrPlaySermon = () => {
+          if (sermon.link && !sermon.audio && !sermon.video) {
+            window.open(sermon.link, '_blank', 'noopener');
+            return;
+          }
+          playSermon(sermon, month, idx);
+        };
+
         item.querySelector('.play-btn').addEventListener('click', (e) => {
           e.stopPropagation();
-          playSermon(sermon, month, idx);
+          openOrPlaySermon();
         });
-        item.addEventListener('click', () => playSermon(sermon, month, idx));
+        item.addEventListener('click', openOrPlaySermon);
 
         const preview = item.querySelector('video.sermon-preview-video');
         if (preview && sermon.video) {
